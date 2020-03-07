@@ -5,7 +5,7 @@ import org.academiadecodigo.simplegraphics.graphics.Color;
 
 public class SimpleGfxColors {
 
-    public static Color getColor(FieldColor color) {
+    public static Color defineColor(FieldColor color) {
 
         Color simpleGfxColor = null;
 

@@ -8,7 +8,7 @@ public class SnakeFactory {
 
         Snake snake;
 
-        snake = new Snake(field.createFieldPosition(field.getCols() - 1, field.getRows() - 1));
+        snake = new Snake(field/*field.createFieldPosition(field.getCols() - field.getBorder(), field.getRows() - field.getBorder())*/);
 
         return snake;
     }

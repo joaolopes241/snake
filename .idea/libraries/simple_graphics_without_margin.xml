@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="simple-graphics-without-margin">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/lib/simple-graphics-without-margin.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

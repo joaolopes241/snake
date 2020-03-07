@@ -63,8 +63,8 @@ public class SimpleGfxGameControls implements GameControls, KeyboardHandler {
 
     }
 
-
-    private void setGoRightEvents() {
+    @Override
+    public void setGoRightEvents() {
 
         KeyboardEvent rightKeyPressed = new KeyboardEvent();
         KeyboardEvent rightKeyPressed1 = new KeyboardEvent();
@@ -83,7 +83,8 @@ public class SimpleGfxGameControls implements GameControls, KeyboardHandler {
         keyboard.addEventListener(rightKeyPressed2);
     }
 
-    private void setGoLeftEvents() {
+    @Override
+    public void setGoLeftEvents() {
 
         KeyboardEvent leftKeyPressed = new KeyboardEvent();
         KeyboardEvent leftKeyPressed1 = new KeyboardEvent();
@@ -102,7 +103,8 @@ public class SimpleGfxGameControls implements GameControls, KeyboardHandler {
         keyboard.addEventListener(leftKeyPressed2);
     }
 
-    private void setGoUpEvents() {
+    @Override
+    public void setGoUpEvents() {
 
         KeyboardEvent upKeyPressed = new KeyboardEvent();
         KeyboardEvent upKeyPressed1 = new KeyboardEvent();
@@ -121,7 +123,8 @@ public class SimpleGfxGameControls implements GameControls, KeyboardHandler {
         keyboard.addEventListener(upKeyPressed2);
     }
 
-    private void setGoDownEvents() {
+    @Override
+    public void setGoDownEvents() {
 
         KeyboardEvent downKeyPressed = new KeyboardEvent();
         KeyboardEvent downKeyPressed1 = new KeyboardEvent();

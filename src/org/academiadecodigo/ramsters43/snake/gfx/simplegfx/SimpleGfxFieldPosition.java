@@ -3,6 +3,7 @@ package org.academiadecodigo.ramsters43.snake.gfx.simplegfx;
 import org.academiadecodigo.ramsters43.snake.field.FieldColor;
 import org.academiadecodigo.ramsters43.snake.field.FieldDirection;
 import org.academiadecodigo.ramsters43.snake.field.fieldposition.AbstractFieldPosition;
+import org.academiadecodigo.ramsters43.snake.field.fieldposition.FieldPosition;
 import org.academiadecodigo.simplegraphics.graphics.Rectangle;
 
 public class SimpleGfxFieldPosition extends AbstractFieldPosition {
@@ -13,11 +14,11 @@ public class SimpleGfxFieldPosition extends AbstractFieldPosition {
 
     public SimpleGfxFieldPosition(int col, int row, SimpleGfxField field) {
 
-        super(field.getBorder() + col,field.getBorder() + row, field);
+        super(col,row, field);
 
         simpleGfxField = field;
 
-        rectangle = new Rectangle(simpleGfxField.colToX(col), simpleGfxField.rowToY(row), field.getCellSize(), field.getCellSize());
+        rectangle = new Rectangle(simpleGfxField.colToX(col), simpleGfxField.rowToY(row), SimpleGfxField.CELL_SIZE, SimpleGfxField.CELL_SIZE);
 
         setColor(FieldColor.DARK_GREEN);
     }
@@ -40,7 +41,7 @@ public class SimpleGfxFieldPosition extends AbstractFieldPosition {
 
         super.setColor(color);
 
-        rectangle.setColor(SimpleGfxColors.getColor(color));
+        rectangle.setColor(SimpleGfxColors.defineColor(color));
 
         show();
     }
@@ -53,6 +54,17 @@ public class SimpleGfxFieldPosition extends AbstractFieldPosition {
         int initialRow = getRow();
 
         super.moveToDirection(direction);
+
+        rectangle.translate(dx(initialCol), dy(initialRow));
+    }
+
+    @Override
+    public void moveToPosition(FieldPosition position) {
+
+        int initialCol = getCol();
+        int initialRow = getRow();
+
+        super.moveToPosition(position);
 
         rectangle.translate(dx(initialCol), dy(initialRow));
     }

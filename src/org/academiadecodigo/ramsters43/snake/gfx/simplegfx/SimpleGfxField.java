@@ -2,18 +2,16 @@ package org.academiadecodigo.ramsters43.snake.gfx.simplegfx;
 
 import org.academiadecodigo.ramsters43.snake.field.Field;
 import org.academiadecodigo.ramsters43.snake.field.FieldColor;
-import org.academiadecodigo.simplegraphics.graphics.Color;
 import org.academiadecodigo.ramsters43.snake.field.fieldposition.FieldPosition;
 import org.academiadecodigo.simplegraphics.graphics.Rectangle;
 
 public class SimpleGfxField implements Field {
 
     public static final int BORDER = 20;
+    public static final int CELL_SIZE = 20;
 
     private int fieldCols;
     private int fieldRows;
-
-    private int cellSize;
 
     private int fieldWidth;
     private int fieldHeight;
@@ -23,13 +21,11 @@ public class SimpleGfxField implements Field {
 
     public SimpleGfxField(int cols, int rows) {
 
-        cellSize = 20;
-
         fieldCols = cols;
         fieldRows = rows;
 
-        fieldWidth = cols * cellSize;
-        fieldHeight = rows * cellSize;
+        fieldWidth = cols * CELL_SIZE;
+        fieldHeight = rows * CELL_SIZE;
     }
 
     @Override
@@ -38,19 +34,19 @@ public class SimpleGfxField implements Field {
         fieldMargin = new Rectangle(0, 0, fieldWidth + BORDER, fieldHeight + BORDER);
         fieldMargin.fill();
 
-        fieldMargin.setColor(SimpleGfxColors.getColor(FieldColor.BROWN));
+        fieldMargin.setColor(SimpleGfxColors.defineColor(FieldColor.BROWN));
 
 
         fieldBackground = new Rectangle(BORDER, BORDER, fieldWidth - BORDER, fieldHeight - BORDER);
         fieldBackground.fill();
 
-        fieldBackground.setColor(SimpleGfxColors.getColor(FieldColor.MUSTARD));
+        fieldBackground.setColor(SimpleGfxColors.defineColor(FieldColor.MUSTARD));
     }
 
     @Override
     public int getBorder() {
 
-        return BORDER/cellSize;
+        return BORDER/CELL_SIZE;
     }
 
     @Override
@@ -85,26 +81,21 @@ public class SimpleGfxField implements Field {
         return fieldBackground.getY();
     }
 
-    public int getCellSize(){
-
-        return cellSize;
-    }
-
 
     @Override
     public FieldPosition createFieldPosition(int col, int row) {
 
-        return new SimpleGfxFieldPosition(col/2,row/2, this);
+        return new SimpleGfxFieldPosition(col,row, this);
     }
 
 
     public int colToX(int col) {
 
-        return BORDER + col * cellSize;
+        return col * CELL_SIZE;
     }
 
     public int rowToY(int row) {
 
-        return BORDER + row * cellSize;
+        return row * CELL_SIZE;
     }
 }

@@ -92,9 +92,7 @@ public abstract class AbstractFieldPosition implements FieldPosition {
                 break;
 
             default:
-
-                moveRight();
-
+                System.out.println("What move is this? O.o");
         }
     }
 
@@ -116,6 +114,13 @@ public abstract class AbstractFieldPosition implements FieldPosition {
     private void moveDown() {
 
         setPos(getCol(), getRow() + 1);
+    }
+
+
+    @Override
+    public void moveToPosition(FieldPosition position) {
+
+        setPos(position.getCol(), position.getRow());
     }
 
 

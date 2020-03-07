@@ -24,6 +24,7 @@ public interface FieldPosition {
 
     public void moveToDirection(FieldDirection direction);
 
+    public void moveToPosition(FieldPosition position);
 
     public boolean equals(FieldPosition position);
 
