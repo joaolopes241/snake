@@ -118,9 +118,9 @@ public abstract class AbstractFieldPosition implements FieldPosition {
 
 
     @Override
-    public void moveToPosition(FieldPosition position) {
+    public void moveToPosition(int col, int row) {
 
-        setPos(position.getCol(), position.getRow());
+        setPos(col, row);
     }
 
 

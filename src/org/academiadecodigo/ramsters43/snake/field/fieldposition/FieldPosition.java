@@ -24,10 +24,9 @@ public interface FieldPosition {
 
     public void moveToDirection(FieldDirection direction);
 
-    public void moveToPosition(FieldPosition position);
+    public void moveToPosition(int col, int row);
 
     public boolean equals(FieldPosition position);
-
 
     public boolean isGoingOutOfEdge(FieldDirection direction);
 

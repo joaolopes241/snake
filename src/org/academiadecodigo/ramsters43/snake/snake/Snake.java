@@ -1,7 +1,6 @@
 package org.academiadecodigo.ramsters43.snake.snake;
 
 import org.academiadecodigo.ramsters43.snake.field.Field;
-import org.academiadecodigo.ramsters43.snake.field.fieldposition.FieldPosition;
 
 import java.util.LinkedList;
 
@@ -16,16 +15,14 @@ public class Snake {
 
         snakeHead = new SnakeHead(field.createFieldPosition(field.getCols()/2,
                 field.getRows()/2));
-        System.out.println("head: " + snakeHead.getFieldPosition().getCol() + ", " + snakeHead.getFieldPosition().getRow());
 
         snakeParts = new LinkedList<>();
+
         snakeParts.offer(new SnakePart(field.createFieldPosition(snakeHead.getFieldPosition().getCol() - colDif,
                 snakeHead.getFieldPosition().getRow())));
-        System.out.println("part1: " + snakeParts.getFirst().getFieldPosition().getCol() + ", " + snakeParts.getFirst().getFieldPosition().getRow());
 
         snakeParts.offer(new SnakePart(field.createFieldPosition(snakeParts.getFirst().getFieldPosition().getCol() - colDif,
                 snakeParts.getFirst().getFieldPosition().getRow())));
-        System.out.println("part2: " + snakeParts.getLast().getFieldPosition().getCol() + ", " + snakeParts.getLast().getFieldPosition().getRow());
     }
 
     public SnakeHead getSnakeHead() {
@@ -36,37 +33,12 @@ public class Snake {
 
     public void move() {
 
-        FieldPosition lastHeadPosition = snakeHead.getFieldPosition();
-        FieldPosition lastSnakePart;
+        int lastHeadCol = snakeHead.getFieldPosition().getCol();
+        int lastHeadRow = snakeHead.getFieldPosition().getRow();
 
-        snakeHead.getFieldPosition().moveToDirection(snakeHead.getCurrentFieldDirection());
+        moveSnakeHead();
 
-        //System.out.println("position: " + snakeHead.getFieldPosition().getCol() + ", " + snakeHead.getFieldPosition().getRow());
-
-        if (snakeHead.getFieldPosition().isGoingOutOfEdge(snakeHead.getCurrentFieldDirection())) {
-
-            //System.out.println("here");
-
-            snakeHead.getFieldPosition().goThroughWalls();
-
-            //System.out.println("position: " + snakeHead.getFieldPosition().getCol() + ", " + snakeHead.getFieldPosition().getRow());
-        }
-
-        lastSnakePart = snakeParts.getFirst().getFieldPosition();
-        snakeParts.getFirst().getFieldPosition().moveToPosition(lastHeadPosition);
-
-        for (SnakePart snakePart : snakeParts) {
-
-            if (snakePart == snakeParts.getFirst()) {
-                System.out.println("blabla");
-                continue;
-            }
-
-            System.out.println("here");
-
-            snakePart.getFieldPosition().moveToPosition(lastSnakePart);
-            lastSnakePart = snakePart.getFieldPosition();
-        }
+        moveSnakeParts(lastHeadCol, lastHeadRow);
     }
 
     public void eat() {
@@ -75,5 +47,35 @@ public class Snake {
 
     public void die() {
 
+    }
+
+    private void moveSnakeHead() {
+
+        snakeHead.getFieldPosition().moveToDirection(snakeHead.getCurrentFieldDirection());
+
+        if (snakeHead.getFieldPosition().isGoingOutOfEdge(snakeHead.getCurrentFieldDirection())) {
+
+            snakeHead.getFieldPosition().goThroughWalls();
+        }
+    }
+
+    private void moveSnakeParts(int lastHeadCol, int lastHeadRow) {
+
+        int lastSnakePartCol = snakeParts.getFirst().getFieldPosition().getCol();
+        int lastSnakePartRow = snakeParts.getFirst().getFieldPosition().getRow();
+
+        snakeParts.getFirst().getFieldPosition().moveToPosition(lastHeadCol, lastHeadRow);
+
+        for (SnakePart snakePart : snakeParts) {
+
+            if (snakePart == snakeParts.getFirst()) {
+                continue;
+            }
+
+            snakePart.getFieldPosition().moveToPosition(lastSnakePartCol, lastSnakePartRow);
+
+            lastSnakePartCol = snakePart.getFieldPosition().getCol();
+            lastSnakePartRow = snakePart.getFieldPosition().getRow();
+        }
     }
 }

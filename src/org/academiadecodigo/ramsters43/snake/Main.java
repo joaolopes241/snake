@@ -7,7 +7,7 @@ public class Main {
 
     public static void main(String[] args) throws InterruptedException {
 
-        Game snakeGame = new Game(FieldType.SIMPLE_GFX, 50, 30, 100);
+        Game snakeGame = new Game(FieldType.SIMPLE_GFX, 50, 30, 200);
 
         snakeGame.init(GameControlsType.SIMPLE_GFX);
 

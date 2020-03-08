@@ -59,13 +59,14 @@ public class SimpleGfxFieldPosition extends AbstractFieldPosition {
     }
 
     @Override
-    public void moveToPosition(FieldPosition position) {
+    public void moveToPosition(int col, int row) {
 
+        System.out.println("pos col: " + col + ", pos row: " + row);
         int initialCol = getCol();
         int initialRow = getRow();
 
-        super.moveToPosition(position);
-
+        super.moveToPosition(col, row);
+        System.out.println("dx: " + dx(initialCol) + " dy: " + dy(initialRow));
         rectangle.translate(dx(initialCol), dy(initialRow));
     }
 
