@@ -1,7 +1,9 @@
 package org.academiadecodigo.ramsters43.snake.field.fieldposition;
 
+import org.academiadecodigo.ramsters43.snake.field.Field;
 import org.academiadecodigo.ramsters43.snake.field.FieldColor;
 import org.academiadecodigo.ramsters43.snake.field.FieldDirection;
+import org.academiadecodigo.ramsters43.snake.snake.Snake;
 
 public interface FieldPosition {
 
@@ -11,20 +13,28 @@ public interface FieldPosition {
 
     public void setPos(int col, int row);
 
+    public void setPos(Snake snake);
+
 
     public FieldColor getColor();
 
-    public void setColor(FieldColor color);
+    public void showSnake();
 
+    public void hideSnake();
 
-    public void show();
+    public void setSnakeColor(FieldColor color);
 
-    public void hide();
+    public void showItem();
 
+    public void hideItem();
+
+    public void setItemColor(FieldColor color);
 
     public void moveToDirection(FieldDirection direction);
 
     public void moveToPosition(int col, int row);
+
+    public void moveToPosition(Snake snake);
 
     public boolean equals(FieldPosition position);
 

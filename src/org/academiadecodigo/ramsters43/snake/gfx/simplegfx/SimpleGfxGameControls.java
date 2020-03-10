@@ -36,24 +36,28 @@ public class SimpleGfxGameControls implements GameControls, KeyboardHandler {
     @Override
     public void keyPressed(KeyboardEvent event) {
 
-        if (event.getKey() == KeyboardEvent.KEY_RIGHT || event.getKey() == KeyboardEvent.KEY_L || event.getKey() == KeyboardEvent.KEY_D) {
+        if (event.getKey() == KeyboardEvent.KEY_RIGHT || event.getKey() == KeyboardEvent.KEY_L ||
+                event.getKey() == KeyboardEvent.KEY_D) {
 
-            snake.getSnakeHead().changeCurrentFieldDirection(FieldDirection.RIGHT);
+            snake.getSnakeHead().changeCurrentFieldDirection(FieldDirection.RIGHT, snake);
         }
 
-        if (event.getKey() == KeyboardEvent.KEY_LEFT || event.getKey() == KeyboardEvent.KEY_J || event.getKey() == KeyboardEvent.KEY_A) {
+        if (event.getKey() == KeyboardEvent.KEY_LEFT || event.getKey() == KeyboardEvent.KEY_J ||
+                event.getKey() == KeyboardEvent.KEY_A) {
 
-            snake.getSnakeHead().changeCurrentFieldDirection(FieldDirection.LEFT);
+            snake.getSnakeHead().changeCurrentFieldDirection(FieldDirection.LEFT, snake);
         }
 
-        if (event.getKey() == KeyboardEvent.KEY_UP || event.getKey() == KeyboardEvent.KEY_I || event.getKey() == KeyboardEvent.KEY_W) {
+        if (event.getKey() == KeyboardEvent.KEY_UP || event.getKey() == KeyboardEvent.KEY_I ||
+                event.getKey() == KeyboardEvent.KEY_W) {
 
-            snake.getSnakeHead().changeCurrentFieldDirection(FieldDirection.UP);
+            snake.getSnakeHead().changeCurrentFieldDirection(FieldDirection.UP, snake);
         }
 
-        if (event.getKey() == KeyboardEvent.KEY_DOWN || event.getKey() == KeyboardEvent.KEY_K || event.getKey() == KeyboardEvent.KEY_S) {
+        if (event.getKey() == KeyboardEvent.KEY_DOWN || event.getKey() == KeyboardEvent.KEY_K ||
+                event.getKey() == KeyboardEvent.KEY_S) {
 
-            snake.getSnakeHead().changeCurrentFieldDirection(FieldDirection.DOWN);
+            snake.getSnakeHead().changeCurrentFieldDirection(FieldDirection.DOWN, snake);
         }
 
     }

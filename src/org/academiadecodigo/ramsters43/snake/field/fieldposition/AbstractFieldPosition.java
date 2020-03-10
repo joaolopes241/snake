@@ -3,6 +3,9 @@ package org.academiadecodigo.ramsters43.snake.field.fieldposition;
 import org.academiadecodigo.ramsters43.snake.field.Field;
 import org.academiadecodigo.ramsters43.snake.field.FieldColor;
 import org.academiadecodigo.ramsters43.snake.field.FieldDirection;
+import org.academiadecodigo.ramsters43.snake.help.Help;
+import org.academiadecodigo.ramsters43.snake.snake.Snake;
+import org.academiadecodigo.ramsters43.snake.snake.SnakePart;
 
 
 /**
@@ -17,13 +20,22 @@ public abstract class AbstractFieldPosition implements FieldPosition {
     private FieldColor fieldColor;
 
 
-    public AbstractFieldPosition(int col, int row, Field field) {
+    public AbstractFieldPosition(int col, int row, Field field, FieldColor color) {
 
         this.col = col;
         this.row = row;
 
         this.field = field;
-        this.fieldColor = FieldColor.NO_COLOR;
+        this.fieldColor = color;
+    }
+
+    public AbstractFieldPosition(Field field, FieldColor color) {
+
+        this.col = Math.toIntExact(Math.round(Math.random() * (field.getCols() - field.getBorder()) + field.getBorder()));
+        this.row = Math.toIntExact(Math.round(Math.random() * (field.getRows() - field.getBorder()) + field.getBorder()));
+
+        this.field = field;
+        this.fieldColor = color;
     }
 
 
@@ -50,7 +62,31 @@ public abstract class AbstractFieldPosition implements FieldPosition {
         this.col = col;
         this.row = row;
 
-        show();
+        showSnake();
+    }
+
+    @Override
+    public void setPos(Snake snake) {
+
+        this.col = Help.generateRandomNumber(field.getCols(), field.getBorder());
+        this.row = Help.generateRandomNumber(field.getRows(), field.getBorder());
+
+        if (col == snake.getSnakeHead().getFieldPositionCol() && row == snake.getSnakeHead().getFieldPositionRow()) {
+
+            setPos(snake);
+            return;
+        }
+
+        for (SnakePart snakePart : snake.getSnakeParts()) {
+
+            if (col == snakePart.getFieldPositionCol() && row == snakePart.getFieldPositionRow()) {
+
+                setPos(snake);
+                return;
+            }
+        }
+
+        showItem();
     }
 
     @Override
@@ -59,7 +95,6 @@ public abstract class AbstractFieldPosition implements FieldPosition {
         return fieldColor;
     }
 
-    @Override
     public void setColor(FieldColor color) {
 
         fieldColor = color;
@@ -119,10 +154,13 @@ public abstract class AbstractFieldPosition implements FieldPosition {
 
     @Override
     public void moveToPosition(int col, int row) {
-
         setPos(col, row);
     }
 
+    @Override
+    public void moveToPosition(Snake snake) {
+        setPos(snake);
+    }
 
     @Override
     public boolean equals(FieldPosition position) {
@@ -199,5 +237,4 @@ public abstract class AbstractFieldPosition implements FieldPosition {
 
         row = field.getRows() - field.getBorder();
     }
-
 }

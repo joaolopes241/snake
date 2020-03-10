@@ -15,4 +15,14 @@ public class SnakePart {
 
         return fieldPosition;
     }
+
+    public int getFieldPositionCol() {
+
+        return fieldPosition.getCol();
+    }
+
+    public int getFieldPositionRow() {
+
+        return fieldPosition.getRow();
+    }
 }

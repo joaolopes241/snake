@@ -6,10 +6,6 @@ public class SnakeFactory {
 
     public static Snake getNewSnake(Field field) {
 
-        Snake snake;
-
-        snake = new Snake(field/*field.createFieldPosition(field.getCols() - field.getBorder(), field.getRows() - field.getBorder())*/);
-
-        return snake;
+        return new Snake(field);
     }
 }

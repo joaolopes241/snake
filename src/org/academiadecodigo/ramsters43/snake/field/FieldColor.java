@@ -4,7 +4,9 @@ public enum FieldColor {
 
     BROWN,
     MUSTARD,
+    BLACK,
     DARK_GREEN,
+    GRAY,
     NO_COLOR
 
 }

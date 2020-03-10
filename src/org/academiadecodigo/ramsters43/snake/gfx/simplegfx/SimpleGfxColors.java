@@ -21,9 +21,19 @@ public class SimpleGfxColors {
                 simpleGfxColor = new Color(255, 219, 88);
                 break;
 
+            case BLACK:
+
+                simpleGfxColor = Color.BLACK;
+                break;
+
             case DARK_GREEN:
 
                 simpleGfxColor = new Color(0, 100, 0);
+                break;
+
+            case GRAY:
+
+                simpleGfxColor = new Color(47, 79, 79);
                 break;
 
             case NO_COLOR:

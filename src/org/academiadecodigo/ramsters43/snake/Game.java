@@ -6,15 +6,16 @@ import org.academiadecodigo.ramsters43.snake.field.FieldType;
 import org.academiadecodigo.ramsters43.snake.gamecontrols.GameControls;
 import org.academiadecodigo.ramsters43.snake.gamecontrols.GameControlsFactory;
 import org.academiadecodigo.ramsters43.snake.gamecontrols.GameControlsType;
+import org.academiadecodigo.ramsters43.snake.item.Item;
+import org.academiadecodigo.ramsters43.snake.item.ItemFactory;
 import org.academiadecodigo.ramsters43.snake.snake.Snake;
 import org.academiadecodigo.ramsters43.snake.snake.SnakeFactory;
 
 public class Game {
 
     private Field field;
-
     private Snake snake;
-
+    private Item item;
     private GameControls gameControls;
 
     private int delay;
@@ -31,11 +32,15 @@ public class Game {
 
         field.init();
 
+        item = ItemFactory.getNewItem(field);
+
         snake = SnakeFactory.getNewSnake(field);
 
         gameControls = GameControlsFactory.createGameControls(gameControlsType, snake);
 
         gameControls.init();
+
+
     }
 
     public void start() throws InterruptedException {
@@ -44,7 +49,17 @@ public class Game {
 
             Thread.sleep(delay);
 
-            snake.move();
+            if (!snake.isDead()) {
+
+                snake.move(field, item);
+                continue;
+            }
+
+            snake.blinkOn();
+
+            Thread.sleep(delay*2);
+
+            snake.blinkOff();
         }
     }
 }

@@ -83,9 +83,15 @@ public class SimpleGfxField implements Field {
 
 
     @Override
-    public FieldPosition createFieldPosition(int col, int row) {
+    public FieldPosition createFieldPosition(int col, int row, FieldColor color) {
 
-        return new SimpleGfxFieldPosition(col,row, this);
+        return new SimpleGfxFieldPosition(col,row, this, color);
+    }
+
+    @Override
+    public FieldPosition createFieldPosition(FieldColor color) {
+
+        return new SimpleGfxFieldPosition(this, color);
     }
 
 

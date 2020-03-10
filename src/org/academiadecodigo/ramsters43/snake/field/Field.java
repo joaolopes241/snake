@@ -12,6 +12,7 @@ public interface Field {
 
     public int getRows();
 
-    public FieldPosition createFieldPosition(int col, int row);
+    public FieldPosition createFieldPosition(int col, int row, FieldColor color);
 
+    public FieldPosition createFieldPosition(FieldColor color);
 }

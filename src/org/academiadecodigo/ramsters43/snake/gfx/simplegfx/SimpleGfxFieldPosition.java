@@ -3,47 +3,84 @@ package org.academiadecodigo.ramsters43.snake.gfx.simplegfx;
 import org.academiadecodigo.ramsters43.snake.field.FieldColor;
 import org.academiadecodigo.ramsters43.snake.field.FieldDirection;
 import org.academiadecodigo.ramsters43.snake.field.fieldposition.AbstractFieldPosition;
-import org.academiadecodigo.ramsters43.snake.field.fieldposition.FieldPosition;
+import org.academiadecodigo.ramsters43.snake.snake.Snake;
+import org.academiadecodigo.simplegraphics.graphics.Ellipse;
 import org.academiadecodigo.simplegraphics.graphics.Rectangle;
 
 public class SimpleGfxFieldPosition extends AbstractFieldPosition {
 
     private Rectangle rectangle;
+    private Ellipse ellipse;
     private SimpleGfxField simpleGfxField;
 
 
-    public SimpleGfxFieldPosition(int col, int row, SimpleGfxField field) {
+    public SimpleGfxFieldPosition(int col, int row, SimpleGfxField field, FieldColor color) {
 
-        super(col,row, field);
+        super(col,row, field, color);
 
         simpleGfxField = field;
 
-        rectangle = new Rectangle(simpleGfxField.colToX(col), simpleGfxField.rowToY(row), SimpleGfxField.CELL_SIZE, SimpleGfxField.CELL_SIZE);
+        rectangle = new Rectangle(simpleGfxField.colToX(getCol()), simpleGfxField.rowToY(getRow()), SimpleGfxField.CELL_SIZE,
+                SimpleGfxField.CELL_SIZE);
 
-        setColor(FieldColor.DARK_GREEN);
+        setSnakeColor(color);
+    }
+
+    public SimpleGfxFieldPosition(SimpleGfxField field, FieldColor color) {
+
+        super(field, color);
+
+        simpleGfxField = field;
+
+        ellipse = new Ellipse(simpleGfxField.colToX(getCol()) + 1, simpleGfxField.rowToY(getRow()) + 1,
+                SimpleGfxField.CELL_SIZE - 2, SimpleGfxField.CELL_SIZE - 2);
+
+        setItemColor(color);
     }
 
 
     @Override
-    public void show() {
+    public void showSnake() {
 
         rectangle.fill();
     }
 
     @Override
-    public void hide() {
+    public void hideSnake() {
 
         rectangle.delete();
     }
 
     @Override
-    public void setColor(FieldColor color) {
+    public void setSnakeColor(FieldColor color) {
 
         super.setColor(color);
 
         rectangle.setColor(SimpleGfxColors.defineColor(color));
 
-        show();
+        showSnake();
+    }
+
+    @Override
+    public void showItem() {
+
+        ellipse.fill();
+    }
+
+    @Override
+    public void hideItem() {
+
+        ellipse.delete();
+    }
+
+    @Override
+    public void setItemColor(FieldColor color) {
+
+        super.setColor(color);
+
+        ellipse.setColor(SimpleGfxColors.defineColor(color));
+
+        showItem();
     }
 
 
@@ -61,13 +98,23 @@ public class SimpleGfxFieldPosition extends AbstractFieldPosition {
     @Override
     public void moveToPosition(int col, int row) {
 
-        System.out.println("pos col: " + col + ", pos row: " + row);
         int initialCol = getCol();
         int initialRow = getRow();
 
         super.moveToPosition(col, row);
-        System.out.println("dx: " + dx(initialCol) + " dy: " + dy(initialRow));
+
         rectangle.translate(dx(initialCol), dy(initialRow));
+    }
+
+    @Override
+    public void moveToPosition(Snake snake) {
+
+        int initialCol = getCol();
+        int initialRow = getRow();
+
+        super.moveToPosition(snake);
+
+        ellipse.translate(dx(initialCol), dy(initialRow));
     }
 
     @Override

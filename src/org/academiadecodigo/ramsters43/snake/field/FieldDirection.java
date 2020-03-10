@@ -8,7 +8,7 @@ public enum FieldDirection {
     DOWN;
 
 
-    public boolean isOpposite(FieldDirection direction) {
+    /*public boolean isOpposite(FieldDirection direction) {
 
         return direction.equals(oppositeDirection());
     }
@@ -45,5 +45,5 @@ public enum FieldDirection {
         }
 
         return opposite;
-    }
+    }*/
 }
