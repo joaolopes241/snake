@@ -1,5 +1,6 @@
 package org.academiadecodigo.ramsters43.snake.gfx.simplegfx;
 
+import org.academiadecodigo.ramsters43.snake.Game;
 import org.academiadecodigo.ramsters43.snake.field.FieldDirection;
 import org.academiadecodigo.ramsters43.snake.gamecontrols.GameControls;
 import org.academiadecodigo.simplegraphics.keyboard.Keyboard;
@@ -12,12 +13,14 @@ public class SimpleGfxGameControls implements GameControls, KeyboardHandler {
 
     private Keyboard keyboard;
     private Snake snake;
+    private Game game;
 
-    public SimpleGfxGameControls(Snake snake) {
+    public SimpleGfxGameControls(Snake snake, Game game) {
 
         keyboard = new Keyboard(this);
 
         this.snake = snake;
+        this.game = game;
     }
 
     @Override
@@ -30,6 +33,10 @@ public class SimpleGfxGameControls implements GameControls, KeyboardHandler {
         setGoUpEvents();
 
         setGoDownEvents();
+
+        setStartEvent();
+
+        setPauseEvent();
     }
 
 
@@ -58,6 +65,16 @@ public class SimpleGfxGameControls implements GameControls, KeyboardHandler {
                 event.getKey() == KeyboardEvent.KEY_S) {
 
             snake.getSnakeHead().changeCurrentFieldDirection(FieldDirection.DOWN, snake);
+        }
+
+        if (event.getKey() == KeyboardEvent.KEY_ENTER) {
+
+            game.setOnPlay();
+        }
+
+        if (event.getKey() == KeyboardEvent.KEY_P) {
+
+            game.setOnPause();
         }
 
     }
@@ -145,5 +162,23 @@ public class SimpleGfxGameControls implements GameControls, KeyboardHandler {
         keyboard.addEventListener(downKeyPressed);
         keyboard.addEventListener(downKeyPressed1);
         keyboard.addEventListener(downKeyPressed2);
+    }
+
+    @Override
+    public void setStartEvent() {
+
+        KeyboardEvent startKeyPressed = new KeyboardEvent();
+        startKeyPressed.setKeyboardEventType(KeyboardEventType.KEY_PRESSED);
+        startKeyPressed.setKey(KeyboardEvent.KEY_ENTER);
+        keyboard.addEventListener(startKeyPressed);
+    }
+
+    @Override
+    public void setPauseEvent() {
+
+        KeyboardEvent pauseKeyPressed = new KeyboardEvent();
+        pauseKeyPressed.setKeyboardEventType(KeyboardEventType.KEY_PRESSED);
+        pauseKeyPressed.setKey(KeyboardEvent.KEY_P);
+        keyboard.addEventListener(pauseKeyPressed);
     }
 }

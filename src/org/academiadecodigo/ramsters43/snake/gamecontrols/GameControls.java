@@ -12,4 +12,8 @@ public interface GameControls {
 
     public void setGoDownEvents();
 
+    public void setStartEvent();
+
+    public void setPauseEvent();
+
 }

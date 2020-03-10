@@ -10,6 +10,7 @@ import org.academiadecodigo.ramsters43.snake.item.Item;
 import org.academiadecodigo.ramsters43.snake.item.ItemFactory;
 import org.academiadecodigo.ramsters43.snake.snake.Snake;
 import org.academiadecodigo.ramsters43.snake.snake.SnakeFactory;
+import org.academiadecodigo.ramsters43.snake.sound.Sound;
 
 public class Game {
 
@@ -17,6 +18,8 @@ public class Game {
     private Snake snake;
     private Item item;
     private GameControls gameControls;
+    private Sound sound;
+    private boolean onPlay = false;
 
     private int delay;
 
@@ -27,20 +30,29 @@ public class Game {
         this.delay = delay;
     }
 
+    public void setOnPlay() {
+        onPlay = true;
+    }
+
+    public void setOnPause() {
+        onPlay = false;
+    }
 
     public void init(GameControlsType gameControlsType) {
 
         field.init();
+        sound = new Sound("/resources/sound/snake_theme_song.wav");
 
         item = ItemFactory.getNewItem(field);
 
         snake = SnakeFactory.getNewSnake(field);
 
-        gameControls = GameControlsFactory.createGameControls(gameControlsType, snake);
+        gameControls = GameControlsFactory.createGameControls(gameControlsType, snake, this);
 
         gameControls.init();
 
-
+        sound.play(true);
+        sound.loopIndef();
     }
 
     public void start() throws InterruptedException {
@@ -57,7 +69,7 @@ public class Game {
 
             snake.blinkOn();
 
-            Thread.sleep(delay*2);
+            Thread.sleep(delay * 2);
 
             snake.blinkOff();
         }
